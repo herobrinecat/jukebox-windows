@@ -22,7 +22,7 @@ class STFTValues:
 def calculate_bandwidth(dataset, hps, duration=600):
     hps = DefaultSTFTValues(hps)
     n_samples = int(dataset.sr * duration)
-    l1, total, total_sq, n_seen, idx = 0.0, 0.0, 0.0, 0.0, dist.get_rank()
+    l1, total, total_sq, n_seen, idx = 0.0, 0.0, 0.0, 0.0, 0
     spec_norm_total, spec_nelem = 0.0, 0.0
     while n_seen < n_samples:
         x = dataset[idx]

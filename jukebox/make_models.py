@@ -101,7 +101,7 @@ def make_vqvae(hps, device='cuda'):
                 num_samples = hps.sample_length
                 downsamples = calculate_strides(hps.strides_t, hps.downs_t)
                 raw_to_tokens = np.prod(downsamples[:level + 1])
-                num_tokens = (num_samples // raw_to_tokens) * dist.get_world_size()
+                num_tokens = (num_samples // raw_to_tokens) * 1
                 bottleneck.restore_k(num_tokens=num_tokens, threshold=hps.revival_threshold)
     else:
         print_all(f"Loading vqvae in eval mode")

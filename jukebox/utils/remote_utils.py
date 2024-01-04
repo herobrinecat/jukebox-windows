@@ -2,7 +2,7 @@ import sys
 import subprocess
 
 def download(remote_path, local_path, async_download=False):
-    args = ['wget', '-O', local_path, remote_path]
+    args = ['curl', '-o', local_path, remote_path]
     print("Running ", " ".join(args))
     if async_download:
         subprocess.Popen(args)

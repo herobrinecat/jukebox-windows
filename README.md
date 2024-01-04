@@ -28,7 +28,7 @@ pip install av
 pip install tensorboardX
  
 # Optional: Apex for faster training with fused_adam
-Follow this workaround to fix the issue with installing apex with fused_adam: https://github.com/NVIDIA/apex/issues/1594#issuecomment-1822218819
+does not work
 ```
 
 # Sampling

@@ -18,7 +18,7 @@ git clone https://github.com/NOAAWeatherRadioS/jukebox-windows.git
 cd jukebox-windows
 py -m venv venv (if you have mulitple python installations, "py -3.8 -m venv venv")
 venv\Scripts\actiavte
-pip install mpi4py==3.0.3
+pip install mpi4py
 pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
 
 pip install -r requirements.txt

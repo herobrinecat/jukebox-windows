@@ -10,7 +10,7 @@ Install Python 3.8 from https://www.python.org/downloads/release/python-3810
 
 Download Microsoft MPI here: https://www.microsoft.com/en-us/download/details.aspx?id=105289
 
-Download CUDA 12.2 here: https://developer.nvidia.com/cuda-12-2-0-download-archive
+Download CUDA 12.1 here: https://developer.nvidia.com/cuda-12-1-0-download-archive
 ```
 # Required: Sampling
 git clone https://github.com/NOAAWeatherRadioS/jukebox-windows.git

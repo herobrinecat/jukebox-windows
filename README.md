@@ -1,7 +1,7 @@
 **Status:** Archive (code is provided as-is, no updates expected)
 
-# Jukebox
-Code for "Jukebox: A Generative Model for Music"
+# Jukebox for Windows
+Just jukebox however their scripts is edited to work for Windows.
 
 [Paper](https://arxiv.org/abs/2005.00341) 
 [Blog](https://openai.com/blog/jukebox) 
@@ -9,25 +9,26 @@ Code for "Jukebox: A Generative Model for Music"
 [Colab](https://colab.research.google.com/github/openai/jukebox/blob/master/jukebox/Interacting_with_Jukebox.ipynb) 
 
 # Install
-Install the conda package manager from https://docs.conda.io/en/latest/miniconda.html    
+Install Python 3.8 from https://www.python.org/downloads/release/python-3810
     
 ``` 
 # Required: Sampling
-conda create --name jukebox python=3.7.5
-conda activate jukebox
-conda install mpi4py=3.0.3 # if this fails, try: pip install mpi4py==3.0.3
-conda install pytorch=1.4 torchvision=0.5 cudatoolkit=10.0 -c pytorch
-git clone https://github.com/openai/jukebox.git
-cd jukebox
+git clone https://github.com/NOAAWeatherRadioS/jukebox-windows.git
+cd jukebox-windows
+py -m venv venv (if you have mulitple python installations, "py -3.8 -m venv venv")
+venv\Scripts\actiavte
+pip install mpi4py==3.0.3
+pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+
 pip install -r requirements.txt
 pip install -e .
 
 # Required: Training
-conda install av=7.0.01 -c conda-forge 
-pip install ./tensorboardX
+pip install av
+pip install tensorboardX
  
 # Optional: Apex for faster training with fused_adam
-conda install pytorch=1.1 torchvision=0.3 cudatoolkit=10.0 -c pytorch
+pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
 pip install -v --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" ./apex
 ```
 

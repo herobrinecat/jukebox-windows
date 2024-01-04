@@ -40,7 +40,7 @@ def log_labels(logger, labeller, tag, y, hps):
     logger.flush()
 
 def get_ddp(model, hps):
-    rank = dist.get_rank()
+    rank = 0
     local_rank = rank % 8
     ddp = DistributedDataParallel(model, device_ids=[local_rank], output_device=local_rank, broadcast_buffers=False, bucket_cap_mb=hps.bucket)
     return ddp
@@ -50,7 +50,7 @@ def get_ema(model, hps):
     ema = None
     if hps.ema and hps.train:
         if hps.cpu_ema:
-            if dist.get_rank() == 0:
+            if 0 == 0:
                 print("Using CPU EMA")
             ema = CPUEMA(model.parameters(), mu=mu, freq=hps.cpu_ema_freq)
         elif hps.ema_fused:
@@ -65,7 +65,7 @@ def get_lr_scheduler(opt, hps):
             lr_scale = hps.lr_scale * min(1.0, step / hps.lr_warmup)
             decay = max(0.0, 1.0 - max(0.0, step - hps.lr_start_linear_decay) / hps.lr_decay)
             if decay == 0.0:
-                if dist.get_rank() == 0:
+                if 0 == 0:
                     print("Reached end of training")
             return lr_scale * decay
         else:
@@ -92,7 +92,7 @@ def get_optimizer(model, hps):
     # fp16 dynamic loss scaler
     scalar = None
     if hps.fp16:
-        rank = dist.get_rank()
+        rank = 0
         local_rank = rank % 8
         scalar = LossScalar(hps.fp16_loss_scale, scale_factor=2 ** (1./hps.fp16_scale_window))
         if local_rank == 0: print(scalar.__dict__)
@@ -129,7 +129,7 @@ def sample_prior(orig_model, ema, logger, x_in, y, hps):
         y = None
     elif hps.level == (hps.levels - 1):
         # Topmost level labels in order
-        y = y[:hps.bs_sample]  # t.ones((hps.bs_sample, 1), device=y.device, dtype=t.long) * dist.get_rank()
+        y = y[:hps.bs_sample]  # t.ones((hps.bs_sample, 1), device=y.device, dtype=t.long) * 0
     else:
         # Other levels keep labels to match x_cond
         y = y[:hps.bs_sample]
@@ -268,7 +268,7 @@ def train(model, orig_model, opt, shd, scalar, ema, logger, metrics, data_proces
                 if ema is not None: ema.swap()
                 orig_model.eval()
                 name = 'latest' if hps.prior else f'step_{logger.iters}'
-                if dist.get_rank() % 8 == 0:
+                if 0 % 8 == 0:
                     save_checkpoint(logger, name, orig_model, opt, dict(step=logger.iters), hps)
                 orig_model.train()
                 if ema is not None: ema.swap()

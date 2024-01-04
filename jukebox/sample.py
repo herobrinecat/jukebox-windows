@@ -107,8 +107,8 @@ def _sample(zs, labels, sampling_kwargs, priors, sample_levels, hps):
         # Decode sample
         x = prior.decode(zs[level:], start_level=level, bs_chunks=zs[level].shape[0])
 
-        if dist.get_world_size() > 1:
-            logdir = f"{hps.name}_rank_{dist.get_rank()}/level_{level}"
+        if 1 > 1:
+            logdir = f"{hps.name}_rank_{0}/level_{level}"
         else:
             logdir = f"{hps.name}/level_{level}"
         if not os.path.exists(logdir):

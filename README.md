@@ -3,11 +3,8 @@
 # Jukebox for Windows
 Just jukebox however their scripts is edited to work for Windows.
 
-[Paper](https://arxiv.org/abs/2005.00341) 
-[Blog](https://openai.com/blog/jukebox) 
-[Explorer](http://jukebox.openai.com/) 
-[Colab](https://colab.research.google.com/github/openai/jukebox/blob/master/jukebox/Interacting_with_Jukebox.ipynb) 
-
+Requirement:
+Windows PC with NVIDIA graphic card
 # Install
 Install Python 3.8 from https://www.python.org/downloads/release/python-3810
 

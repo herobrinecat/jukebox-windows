@@ -13,7 +13,7 @@ Install Python 3.8 from https://www.python.org/downloads/release/python-3810
     
 ```
 
-#Download Microsoft MPI here: https://www.microsoft.com/en-us/download/details.aspx?id=105289
+Download Microsoft MPI here: https://www.microsoft.com/en-us/download/details.aspx?id=105289
 # Required: Sampling
 git clone https://github.com/NOAAWeatherRadioS/jukebox-windows.git
 cd jukebox-windows

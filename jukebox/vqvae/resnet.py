@@ -60,7 +60,7 @@ class Resnet1D(nn.Module):
             blocks = blocks[::-1]
         self.checkpoint_res = checkpoint_res
         if self.checkpoint_res == 1:
-            if dist.get_rank() == 0:
+            if 0 == 0:
                 print("Checkpointing convs")
             self.blocks = nn.ModuleList(blocks)
         else:

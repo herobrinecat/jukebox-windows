@@ -29,7 +29,7 @@ pip install tensorboardX
  
 # Optional: Apex for faster training with fused_adam
 pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
-pip install -v --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" ./apex
+pip install apex
 ```
 
 # Sampling

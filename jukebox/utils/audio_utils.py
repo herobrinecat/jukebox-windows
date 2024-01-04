@@ -37,7 +37,7 @@ def calculate_bandwidth(dataset, hps, duration=600):
         l1 += np.sum(np.abs(samples))
         total += np.sum(samples)
         total_sq += np.sum(samples ** 2)
-        idx += max(16, dist.get_world_size())
+        idx += max(16, 1)
 
     if dist.is_available():
         from jukebox.utils.dist_utils import allreduce

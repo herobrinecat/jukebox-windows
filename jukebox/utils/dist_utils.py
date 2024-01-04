@@ -40,7 +40,7 @@ def allgather_lists(xs):
     return [xs[i][:lengths[i]].cpu().numpy().tolist() for i in range(total_bs)]
 
 def setup_dist_from_mpi(
-    master_addr="127.0.0.1", backend="nccl", port=29500, n_attempts=5, verbose=False
+    master_addr="127.0.0.1", backend="gloo", port=29500, n_attempts=5, verbose=False
 ):
     if dist.is_available():
         return _setup_dist_from_mpi(master_addr, backend, port, n_attempts, verbose)
@@ -57,7 +57,7 @@ def setup_dist_from_mpi(
         return mpi_rank, local_rank, device
 
 def _setup_dist_from_mpi(master_addr, backend, port, n_attempts, verbose):
-    from mpi4py import MPI  # This must be imported in order to get e   rrors from all ranks to show up
+    from mpi4py import MPI  # This must be imported in order to get errors from all ranks to show up
 
     mpi_rank = MPI.COMM_WORLD.Get_rank()
     mpi_size = MPI.COMM_WORLD.Get_size()
@@ -94,8 +94,8 @@ def _setup_dist_from_mpi(master_addr, backend, port, n_attempts, verbose):
 
             return mpi_rank, local_rank, device
         except RuntimeError as e:
-            print(f"Caught error during NCCL init (attempt {attempt_idx} of {n_attempts}): {e}")
+            print(f"Caught error during GLOO init (attempt {attempt_idx} of {n_attempts}): {e}")
             sleep(1 + (0.01 * mpi_rank))  # Sleep to avoid thundering herd
             pass
 
-    raise RuntimeError("Failed to initialize NCCL")
+    raise RuntimeError("Failed to initialize GLOO")

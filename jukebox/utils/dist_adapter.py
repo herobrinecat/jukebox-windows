@@ -19,20 +19,16 @@ def is_available():
     return dist.is_available()
 
 def get_rank():
-    if is_available():
-        return _get_rank()
-    else:
-        return 0
+   return 0
 
 def get_world_size():
     if is_available():
-        return _get_world_size()
+        return 1
     else:
         return 1
 
 def barrier():
-    if is_available():
-        return _barrier()
+   return None
     #else: do nothing
 
 def all_gather(tensor_list, tensor):
@@ -62,13 +58,13 @@ def init_process_group(backend, init_method):
     #else: do nothing
 
 def _get_rank():
-    return dist.get_rank()
+    return 0
 
 def _barrier():
-    return dist.barrier()
+    return None
 
 def _get_world_size():
-    return dist.get_world_size()
+    return 1
 
 def _all_gather(tensor_list, tensor):
     return dist.all_gather(tensor_list, tensor)

@@ -142,6 +142,6 @@ class Logger:
         for tag, layer, val, work in self.works:
             work.wait()
             if self.rank == 0:
-                val = val.item()/dist.get_world_size()
+                val = val.item()/1
                 self.lw[layer].add_scalar(tag, val, self.iters)
         self.works = []

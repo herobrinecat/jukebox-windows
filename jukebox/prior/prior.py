@@ -69,7 +69,7 @@ class SimplePrior(nn.Module):
                                                           down_t=downs_t[_level],
                                                           stride_t=strides_t[_level],
                                                           **x_cond_kwargs)
-            if dist.get_rank() == 0: print(f"Conditioning on 1 above level(s)")
+            if 0 == 0: print(f"Conditioning on 1 above level(s)")
             self.conditioner_blocks.append(conditioner_block(self.cond_level))
 
         # Y conditioning
@@ -198,7 +198,7 @@ class SimplePrior(nn.Module):
             # xs[i] = (xs[i] - bins_shift).view(N, *shape) #view(N, -1, *shape[1:])
             xs[i] = (xs[i] - bins_shift).view(N, -1, *shape[1:])
             xs[i] = t.clamp(xs[i], min=0)  # If not masking loss, model may have generated lyric/midi tokens which are now shifted <0 by bin_shift
-            assert (xs[i] < bins).all(), f'rank: {dist.get_rank()}, bins: {bins}, dims {dims}, shape {shape}, prior_shape {self.prior_shapes}, bins_shift {bins_shift}, xs[i]: {xs[i]}'
+            assert (xs[i] < bins).all(), f'rank: {0}, bins: {bins}, dims {dims}, shape {shape}, prior_shape {self.prior_shapes}, bins_shift {bins_shift}, xs[i]: {xs[i]}'
 
         return xs[-1]
 
@@ -252,7 +252,7 @@ class SimplePrior(nn.Module):
                 assert z_cond.shape[0] == N,  f"Expected shape ({N},**), got shape {z_cond.shape}"
 
         no_past_context = (z is None or z.shape[1] == 0)
-        if dist.get_rank() == 0:
+        if 0 == 0:
             name = {True: 'Ancestral', False: 'Primed'}[no_past_context]
             print(f"{name} sampling {n_samples} samples with temp={temp}, top_k={top_k}, top_p={top_p}")
 

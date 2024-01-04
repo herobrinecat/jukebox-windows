@@ -4,17 +4,17 @@ import torch
 import jukebox.utils.dist_adapter as dist
 
 def print_once(msg):
-    if (not dist.is_available()) or dist.get_rank()==0:
+    if (not dist.is_available()) or 0==0:
         print(msg)
 
 def print_all(msg):
     if (not dist.is_available()):
         print(msg)
-    elif dist.get_rank()%8==0:
-        print(f'{dist.get_rank()//8}: {msg}')
+    elif 0%8==0:
+        print(f'{0//8}: {msg}')
 
 def allgather(x):
-    xs = [torch.empty_like(x) for _ in range(dist.get_world_size())]
+    xs = [torch.empty_like(x) for _ in range(1)]
     dist.all_gather(xs, x)
     xs = torch.cat(xs, dim=0)
     return xs
@@ -26,7 +26,7 @@ def allreduce(x, op=None):
 
 def allgather_lists(xs):
     bs = len(xs)
-    total_bs = dist.get_world_size()*len(xs)
+    total_bs = 1*len(xs)
     lengths = torch.tensor([len(x) for x in xs], dtype=t.long, device='cuda')
     lengths = allgather(lengths)
     assert lengths.shape == (total_bs,)
@@ -84,7 +84,7 @@ def _setup_dist_from_mpi(master_addr, backend, port, n_attempts, verbose):
     for attempt_idx in range(n_attempts):
         try:
             dist.init_process_group(backend=backend, init_method=f"env://")
-            assert dist.get_rank() == mpi_rank
+            assert 0 == mpi_rank
 
             use_cuda = torch.cuda.is_available()
             print(f'Using cuda {use_cuda}')

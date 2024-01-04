@@ -286,7 +286,6 @@ def train(model, orig_model, opt, shd, scalar, ema, logger, metrics, data_proces
 
         logger.set_postfix(**{print_key:_metrics[key] for print_key, key in _print_keys.items()})
         if finished_training:
-            dist.barrier()
             exit()
     logger.close_range()
     return {key: metrics.avg(key) for key in _metrics.keys()}
@@ -329,7 +328,6 @@ def run(hps="teeny", port=29500, **kwargs):
             train_metrics['epoch'] = epoch
             if rank == 0:
                 print('Train',' '.join([f'{key}: {val:0.4f}' for key,val in train_metrics.items()]))
-            dist.barrier()
 
         if hps.test:
             if ema: ema.swap()
@@ -337,9 +335,7 @@ def run(hps="teeny", port=29500, **kwargs):
             test_metrics['epoch'] = epoch
             if rank == 0:
                 print('Ema',' '.join([f'{key}: {val:0.4f}' for key,val in test_metrics.items()]))
-            dist.barrier()
             if ema: ema.swap()
-        dist.barrier()
 
 if __name__ == '__main__':
     fire.Fire(run)

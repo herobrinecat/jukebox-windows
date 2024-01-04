@@ -33,7 +33,6 @@ def load_checkpoint(path):
             if not os.path.exists(local_path):
                 download(remote_path, local_path)
         restore = local_path
-    dist.barrier()
     checkpoint = t.load(restore, map_location=t.device('cpu'))
     print("Restored from {}".format(restore))
     return checkpoint
@@ -237,7 +236,6 @@ def save_outputs(model, device, hps):
         data[level] = dict(x=x_in, y=y_in, x_out=x_out, preds=preds)
         prior.cpu()
     t.save(data, 'data.pth.tar')
-    dist.barrier()
     print("Saved data")
     exit()
 

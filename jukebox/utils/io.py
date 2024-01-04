@@ -114,7 +114,6 @@ def test_dataset_loader():
     train_loader = DataLoader(dataset, batch_size=hps.bs, num_workers=hps.nworkers, pin_memory=False, sampler=sampler,
                               drop_last=True, collate_fn=collate_fn)
 
-    dist.barrier()
     sampler.set_epoch(0)
     for i, x in enumerate(tqdm(train_loader)):
         x = x.to('cuda', non_blocking=True)
@@ -126,7 +125,6 @@ def test_dataset_loader():
         for j, aud in enumerate(x):
             writer.add_audio('out_' + str(i*hps.bs + j), aud, 1, hps.sr)
         print("Wrote out")
-        dist.barrier()
         break
 
 if __name__ == '__main__':

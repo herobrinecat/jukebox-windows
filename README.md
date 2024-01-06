@@ -26,7 +26,7 @@ pip install -r requirements.txt
 pip install -e .
 
 # Required: Training
-pip install av
+pip install av==7.0.1
 pip install tensorboardX
  
 # Optional: Apex for faster training with fused_adam

@@ -3,7 +3,7 @@
 # Jukebox for Windows
 Just jukebox however their scripts is edited to work for Windows.
 
-Only tested on 1b_lyrics. Not tested on training, 5b, and 5b_lyrics.
+Only tested on 1b_lyrics (working). Not tested on 5b, and 5b_lyrics. (training currently doesn't work)
 
 Requirement:
 Windows PC with NVIDIA graphic card

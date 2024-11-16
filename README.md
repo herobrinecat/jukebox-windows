@@ -9,6 +9,7 @@ Requirement:
 Windows PC with NVIDIA graphic card
 # Install
 Install Python 3.9 from https://www.python.org/downloads/release/python-3913/
+
 Download Microsoft MPI here: https://www.microsoft.com/en-us/download/details.aspx?id=105289
 
 Download CUDA 12.1 here: https://developer.nvidia.com/cuda-12-1-0-download-archive

@@ -17,7 +17,7 @@ Download CUDA 12.1 here: https://developer.nvidia.com/cuda-12-1-0-download-archi
 # Required: Sampling
 git clone https://github.com/herobrinecat/jukebox-windows.git
 cd jukebox-windows
-py -m venv venv (if you have mulitple python installations, "py -3.8 -m venv venv")
+py -m venv venv (if you have mulitple python installations, "py -3.9 -m venv venv")
 venv\Scripts\activate
 pip install mpi4py
 pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
